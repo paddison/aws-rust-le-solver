@@ -1,0 +1,44 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
+Resources:
+  readbucket:
+    Type: AWS::S3::Bucket     
+    Properties: 
+      BucketName: read-bucket-auto
+  writebucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: write-bucket-auto
+  LESolver:
+    Type: AWS::Serverless::Function
+    Properties:
+      MemorySize: 128
+      Architectures: ["x86_64"]
+      Handler: bootstrap
+      Runtime: provided.al2
+      Timeout: 5
+      PackageType: Zip
+      CodeUri: target/lambda/hello_aws/bootstrap.zip
+      Policies:
+        - AWSLambdaBasicExecutionRole
+        - AWSLambda_ReadOnlyAccess
+        - AWSXrayWriteOnlyAccess
+        - AWSLambdaVPCAccessExecutionRole
+        - AmazonS3FullAccess
+      Tracing: Active
+      Events:
+        s3Notification:
+          Type: S3
+          Properties:
+            Bucket: !Ref readbucket
+            Events: s3:ObjectCreated:*
+      Environment:
+        Variables:
+          READ_BUCKET: read-bucket-auto
+          WRITE_BUCKET: !Ref writebucket
+
+Outputs:
+  FunctionName:
+    Value: !Ref LESolver
+    Description: Solves a linear equation

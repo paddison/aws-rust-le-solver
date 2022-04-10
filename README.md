@@ -5,11 +5,14 @@ A small Program that creates a lambda function that solves a linear equation sys
 # Prerequisites
 
 Make sure cargo lambda is installed:
-```> cargo lambda --version
+```
+> cargo lambda --version
 > cargo-lambda 0.5.3
 ```
 Otherwise run:
-```cargo install cargo-lambda```
+```
+cargo install cargo-lambda
+```
 
 # Execute
 

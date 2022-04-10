@@ -14,7 +14,7 @@ Otherwise run:
 cargo install cargo-lambda
 ```
 
-# Execute
+# Deploy
 
 run `sh ./deploy.sh` from your terminal.
 

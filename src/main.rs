@@ -92,6 +92,7 @@ async fn matrix_handler(req: LambdaEvent<Value>) -> Response {
     info!("storing solution in {}...", write_bucket);
     let _ = store_in_bucket(&client, &write_bucket, key, &result).await?;
 
+    info!("Done");
     Ok(SuccessResponse {
         body : format!("Result was: {}, it was stored in bucket {}/{}", result, write_bucket, key),
     })

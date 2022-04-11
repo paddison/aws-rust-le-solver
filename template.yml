@@ -37,6 +37,7 @@ Resources:
         Variables:
           READ_BUCKET: read-bucket-auto
           WRITE_BUCKET: !Ref writebucket
+          RUST_LOG: info
 
 Outputs:
   FunctionName:

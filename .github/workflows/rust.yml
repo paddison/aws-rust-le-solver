@@ -29,5 +29,8 @@ jobs:
     - name: Deploy
       run: |
         aws cloudformation package --template-file template.yml \
-                            --s3-bucket rust-deployment \
-                           --output-template-file out.yml
+                          --s3-bucket rust-deployment \
+                          --output-template-file out.yml
+        aws cloudformation deploy --template-file out.yml \
+                          --stack-name my-stack \
+                          --capabilities CAPABILITY_IAM

@@ -20,12 +20,12 @@ jobs:
         rustup target add x86_64-unknown-linux-gnu 
         cargo install cargo-lambda
     - name: Build
-      run: cargo lambda build --release --target x86_64-unknown-linux-gnu
+      run: cargo lambda build --release --target x86_64-unknown-linux-gnu --output-format zip
     - name: Upload
       uses: actions/upload-artifact@v3
       with:
         name: bootstrap
-        path: ./target/lambda/gauss_lambda/bootstrap.zip
+        path: ./target/lambda/hello_aws/bootstrap.zip
   deploy:
     runs-on: self-hosted
     needs: build
